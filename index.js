@@ -14,7 +14,7 @@
 //I'm using bank example here but you can use any real world example it totally depends on you.
 
 
-import {createStore} from "redux";
+import {combineReducers, createStore} from "redux";
   //createStore is a function which we import from redux
 
 
@@ -24,51 +24,74 @@ import {createStore} from "redux";
 // like this {type,payload} instead of action BTW Both are correct if you action or 
 // {type,payload}
 
-const cashDeposit = (state = 10000,{type,payload}) =>{
- if (type === "cashDeposit"){
-    return state + payload
-
- }
-
- return state
-
-}
-
-// const bankStore = createStore(cashDeposit)
-
-// bankStore.dispatch({type:"cashDeposit", payload:10000})
-
-// console.log(bankStore.getState());
 
 
 
 
+// const cashDeposit = (state=initialValue,{type,payload}) =>{
+//  if (type === "cashDeposit"){
+//     return {cash: state.cash + payload}
+
+//  }
+
+//  return state
+
+// }
+
+// // const bankStore = createStore(cashDeposit)
+
+// // bankStore.dispatch({type:"cashDeposit", payload:10000})
+
+// // console.log(bankStore.getState());
 
 
 
-const withDraw = (state=2000,{type,payload})=>{
-    if (type === "withDraw"){
-        return state - payload;
-    }
+
+
+
+
+// const withDraw = (state=initialValue,{type,payload})=>{
+//     if (type === "withDraw"){
+
+//         if(state.cash < payload){
+//             return "no money"
+//         }
+//         else{
+//              return{cash: state.cash - payload}
+//         }
+      
+//     }
    
-    return state
+//     return state
 
-}
+// }
 
 
-// const bankStore = createStore(withDraw)
-// bankStore.dispatch({type:"WithDraw",payload:1000})
+// // const bankStore = createStore(withDraw)
+// // bankStore.dispatch({type:"WithDraw",payload:1000})
+// // console.log(bankStore.getState());
+
+
+
+// const showBalance= (state=initialValue,{type}) =>{
+//      if(type === "showBalance"){
+//         return state
+//      }
+//      return state
+// }
+
+
+// const merge = combineReducers({
+//     cashDeposit:cashDeposit,
+//     withDraw:  withDraw,
+//     showBalance:showBalance
+// })
+
+// const bankStore = createStore(merge )
+// bankStore.dispatch({type:"cashDeposit", payload:5})
+// bankStore.dispatch({type:"WithDraw",payload:20})
+// bankStore.dispatch({type:"showBalance"})
 // console.log(bankStore.getState());
 
 
 
-const showBalance= (state=3000,{type}) =>{
-     if(type === "showBalance"){
-        return state
-     }
-     return state
-}
-
-const bankStore = createStore(showBalance)
-bankStore.dispatch({type:"showBalance", })
-console.log(bankStore.getState());
