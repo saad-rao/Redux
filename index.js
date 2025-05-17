@@ -95,3 +95,62 @@ import {combineReducers, createStore} from "redux";
 
 
 
+
+const initialValue = {
+    cash:100
+}
+
+
+const cashDeposit = (state = initialValue,{type,payload}) =>{
+    if(type === "cashDeposit"){
+        return {cash: state.cash + payload}
+    }
+
+    return state
+
+}
+
+
+
+
+
+const withDraw = (state=initialValue, {type,payload}) =>{
+    if (type === "withDraw" ){
+        return {cash : state.cash - payload}
+    }
+    return state
+}
+
+
+
+const showBalance = (state = initialValue,{type}) =>{
+if(type === "showBalance"){
+    return state
+}
+
+return state
+    
+}
+
+
+const merge = combineReducers({
+    cashDeposit: cashDeposit,
+    withDraw: withDraw,
+    showBalance: showBalance
+
+
+})
+
+const bankStore = createStore(merge)
+bankStore.dispatch({type:"cashDeposit", payload:10})
+bankStore.dispatch({type:"withDraw", payload:5 })
+bankStore.dispatch({type:"showBalance"})
+console.log(bankStore.getState());
+
+
+
+
+
+
+
+
