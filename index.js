@@ -34,19 +34,19 @@ const cashDeposit = (state = 10000,{type,payload}) =>{
 
 }
 
-const bankStore = createStore(cashDeposit)
+// const bankStore = createStore(cashDeposit)
 
-bankStore.dispatch({type:"cashDeposit", payload:10000})
+// bankStore.dispatch({type:"cashDeposit", payload:10000})
 
-console.log(bankStore.getState());
-
-
+// console.log(bankStore.getState());
 
 
 
 
 
-const withDraw = (state=10000,{type,payload})=>{
+
+
+const withDraw = (state=2000,{type,payload})=>{
     if (type === "withDraw"){
         return state - payload;
     }
@@ -57,5 +57,18 @@ const withDraw = (state=10000,{type,payload})=>{
 
 
 // const bankStore = createStore(withDraw)
-bankStore.dispatch({type:"WithDraw",payload:1000})
+// bankStore.dispatch({type:"WithDraw",payload:1000})
+// console.log(bankStore.getState());
+
+
+
+const showBalance= (state=3000,{type}) =>{
+     if(type === "showBalance"){
+        return state
+     }
+     return state
+}
+
+const bankStore = createStore(showBalance)
+bankStore.dispatch({type:"showBalance", })
 console.log(bankStore.getState());
