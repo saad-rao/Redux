@@ -101,56 +101,87 @@ const initialValue = {
 }
 
 
-const cashDeposit = (state = initialValue,{type,payload}) =>{
+const bankReducer = (state = initialValue,{type,payload}) =>{
     if(type === "cashDeposit"){
         return {cash: state.cash + payload}
     }
 
-    return state
-
-}
-
-
-
-
-
-const withDraw = (state=initialValue, {type,payload}) =>{
-    if (type === "withDraw" ){
+    else if(type === "withDraw" ){
         return {cash : state.cash - payload}
     }
+
+    else if(type === "showBalance"){
     return state
+}
+
+    return state
+
 }
 
 
 
-const showBalance = (state = initialValue,{type}) =>{
-if(type === "showBalance"){
-    return state
-}
 
-return state
+
+// const withDraw = (state=initialValue, {type,payload}) =>{
+//     if (type === "withDraw" ){
+//         return {cash : state.cash - payload}
+//     }
+//     return state
+// }
+
+
+
+// const showBalance = (state = initialValue,{type}) =>{
+// if(type === "showBalance"){
+//     return state
+// }
+
+// return state
     
-}
+// }
 
 
-const merge = combineReducers({
-    cashDeposit: cashDeposit,
-    withDraw: withDraw,
-    showBalance: showBalance
+// const merge = combineReducers({
+//     cashDeposit: cashDeposit,
+//     withDraw: withDraw,
+//     showBalance: showBalance
 
 
-})
+// })
 
-const bankStore = createStore(merge)
+const bankStore = createStore(bankReducer)
 bankStore.dispatch({type:"cashDeposit", payload:10})
-bankStore.dispatch({type:"withDraw", payload:5 })
-bankStore.dispatch({type:"showBalance"})
+// bankStore.dispatch({type:"withDraw", payload:5 })
+// bankStore.dispatch({type:"showBalance"})
+
 console.log(bankStore.getState());
 
 
 
 
 
+//Counter application simple 
 
 
+const initialCounter  = {
+    counter : 0
+}
 
+const CounterReducer = (state=initialCounter,{type})=>{
+   switch(type){
+    case "inc":
+        return {counter: state.counter + 1}
+
+        case "dec":
+            return {counter: state.counter - 1}
+
+            default:
+                return state
+   }
+
+}
+
+
+const counter = createStore(CounterReducer)
+counter.dispatch({type:"inc"})
+console.log(counter.getState());
